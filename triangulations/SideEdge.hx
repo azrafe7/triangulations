@@ -79,6 +79,7 @@ class SideEdge {
         return out;
     }
     
+    /*
     public inline
     function substitute( x: Null<Int>, y: Null<Int> ) {
         if( this == null ) return;
@@ -91,5 +92,5 @@ class SideEdge {
         } else {
             d = y;
         }
-    }
+    }*/
 }

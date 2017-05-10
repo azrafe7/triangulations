@@ -181,6 +181,19 @@ class Rupert {
       coEdges[ pcj ] = new Edge( ai, bi );
       sideEdges[ pcj ] = new SideEdge( caj, bcj, pbj, paj );
 
+      Edges.subst2([coEdges[bcj]], ai, pi);
+      Edges.subst4([sideEdges[bcj]], caj, pcj);
+      Edges.subst4([sideEdges[bcj]], abj, pbj);
+      
+      Edges.subst2([coEdges[caj]], bi, pi);
+      Edges.subst4([sideEdges[caj]], abj, paj);
+      Edges.subst4([sideEdges[caj]], bcj, pcj);
+      
+      Edges.subst2([coEdges[abj]], ci, pi);
+      Edges.subst4([sideEdges[abj]], bcj, pbj);
+      Edges.subst4([sideEdges[abj]], caj, paj);
+
+      /*
       coEdges[bcj].substitute( ai, pi );
       sideEdges[bcj].substitute( caj, pcj );
       sideEdges[bcj].substitute( abj, pbj );
@@ -192,6 +205,7 @@ class Rupert {
       coEdges[abj].substitute( ci, pi );
       sideEdges[abj].substitute( bcj, pbj );
       sideEdges[abj].substitute( caj, paj );
+      */
 
       var unsureEdges = [];
       if( !edges[bcj].fixed ) unsureEdges.push(bcj);

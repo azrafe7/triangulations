@@ -276,6 +276,7 @@ class Triangulate {
       // !!!! pass coEdges and SideEdges in rather than return object of them.  !!!
       //var coEdges = [];
       //var sideEdges = [];
+      
       for( j in 0...edges.length ){
         coEdges[ j ] = new Edge( null, null );
         sideEdges[ j ] = SideEdge.getEmpty();
@@ -405,12 +406,23 @@ class Triangulate {
         jb =  edges.length - 1;
         j0 = sideEdges[j].a; 
         j3 = sideEdges[j].d;
+        
+        Edges.subst2([coEdges[j0]], ia, ip);
+        Edges.subst4([sideEdges[j0]],  j, jc);
+        Edges.subst4([sideEdges[j0]], j3, jb);
+        
+        Edges.subst2([coEdges[j3]], ic, ip);
+      //Edges.subst4([sideEdges[j3]],  j, ja); // Not needed, ja == j
+        Edges.subst4([sideEdges[j3]], j0, jb);
+
+        
+        /*
         coEdges[j0].substitute( ia, ip );
         sideEdges[j0].substitute( j, jc );
         sideEdges[j0].substitute( j3, jb );
         coEdges[j3].substitute( ic, ip );
       //arraySubst4(sideEdges[j3],  j, ja); // Not needed, ja == j
-        sideEdges[j3].substitute( j0, jb );
+        sideEdges[j3].substitute( j0, jb );*/
         coEdges[jb] = new Edge( ia, ic );
         sideEdges[jb] = new SideEdge( ja, jc, j0, j3 );
         if( !edges[j0].fixed ) unsureEdges.push( j0 );
@@ -425,12 +437,23 @@ class Triangulate {
         jd = edges.length - 1;
         j1 = sideEdges[j].b; 
         j2 = sideEdges[j].c;
-        coEdges[j1].substitute( ia, ip );
+        
+        Edges.subst2([coEdges[j1]], ia, ip);
+        Edges.subst4([sideEdges[j1]],  j, jc);
+        Edges.subst4([sideEdges[j1]], j2, jd);
+        
+        Edges.subst2([coEdges[j2]], ic, ip);
+      //Edges.subst4([sideEdges[j2]],  j, ja); // Not needed, ja == j
+        Edges.subst4([sideEdges[j2]], j1, jd);
+        
+        /*coEdges[j1].substitute( ia, ip );
         sideEdges[j1].substitute( j, jc );
         sideEdges[j1].substitute( j2, jd );
         coEdges[j2].substitute( ic, ip );
       //arraySubst4(sideEdges[j2],  j, ja); // Not needed, ja == j
         sideEdges[j2].substitute( j1, jd );
+        */
+        
         coEdges[ jd ] = new Edge( ia, ic );
         sideEdges[ jd ] = new SideEdge( j2, j1, jc, ja );
         if( !edges[j1].fixed ) unsureEdges.push( j1 );
